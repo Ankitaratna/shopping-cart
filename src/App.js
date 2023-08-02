@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Home from './containers/Home';
+import Checkout from './containers/checkout';
+import {ErrorProvider} from './Provider/index';
+const ShoppingApp = () => {
+  const [view, setView] = useState('cart'); // 'cart' or 'checkout'
 
-function App() {
+  const handleViewChange = (newView) => {
+    setView(newView);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <ErrorProvider>
+    <div>
+      <h1>Shopping App</h1>
+      <button onClick={() => handleViewChange('cart')}>View Cart</button>
+      <button onClick={() => handleViewChange('checkout')}>Checkout</button>
 
-export default App;
+      {view === 'cart' && <Home />}
+      {view === 'checkout' && <Checkout />}
+    </div>
+    </ErrorProvider>
+  );
+};
+
+export default ShoppingApp;
