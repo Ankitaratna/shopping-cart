@@ -18,7 +18,15 @@ module.exports = {
 
   // Supported file loaders
   module: {
-    rules: [
+    rules: [ {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'resolve-url-loader', // Make sure this comes before other CSS loaders
+        'css-loader',
+        'postcss-loader',
+      ],
+    },
       {
         test: /\.tsx?$/,
         loader: "ts-loader"

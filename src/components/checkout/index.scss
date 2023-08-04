@@ -1,0 +1,11 @@
+.cart-total
+{  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr;
+  justify-content: space-between;
+  width: 31vw;
+  margin-left: auto;
+}
+.header{
+  margin-left: 0.6rem;
+}

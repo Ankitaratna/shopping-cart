@@ -1,27 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 
-const useShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([]);
+const useCheckoutCalculations = (cartItems) => {
+  const [discountedList, setDiscountedList] = useState([]);
+  const [discountedTotal, setDiscountedTotal] = useState();
+  const [cartTotal] = useState(
+    cartItems ? cartItems.reduce((total, item) => total + item.price, 0) : 0
+  );
 
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
+      setDiscountedTotal(cartTotal - 0.1 * cartTotal);
+      let tempDiscountedList = cartItems.map((item) => ({
+        ...item,
+        discountedPrice: item.price - 0.1 * item.price,
+      }));
+      setDiscountedList(tempDiscountedList);
+    }
+  }, [cartItems]);
 
-  const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
-  };
-
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-  };
-
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
-  };
-
-  return {
-    cartItems,
-    addToCart,
-    removeFromCart,
-    calculateTotal,
-  };
+  return { discountedList, discountedTotal, cartTotal };
 };
 
-export default useShoppingCart;
+export default useCheckoutCalculations;
