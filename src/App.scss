@@ -24,6 +24,41 @@
     &:focus {
       outline: none;
     }
+    &:disabled{
+      background-color:grey
+    }
   }
 }
+.success-card {
+  background-color: #dff0d8;
+  border: 1px solid #3c763d;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  margin: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.success-card h3 {
+  color: #3c763d;
+}
+
+.success-card p {
+  color: #333;
+}
+
+/* Optional: Animation for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.success-card {
+  animation: fadeIn 0.5s ease;
+}
+
 }

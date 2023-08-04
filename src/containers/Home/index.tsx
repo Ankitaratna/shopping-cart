@@ -11,32 +11,37 @@ interface CatalogItem {
   image: string;
 }
 
-const Home: React.FC = () => {
-  const {cartItems, addToCart, removeFromCart}=useContext(CartContext);
-  console.log(cartItems)
+const Home: React.FC<any> = (props) => {
+  const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
   const [catalogItems, setCatalogItems] = useState<CatalogItem[]>([]);
-  const[iscataloglistLoading,setiscataloglistLoading]=useState<boolean>(true);
+  const [iscataloglistLoading, setiscataloglistLoading] =
+    useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       setiscataloglistLoading(true);
-      const response = await fetch('https://fakestoreapi.com/products');
+      const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
       setCatalogItems(data);
       setiscataloglistLoading(false);
     })();
   }, []);
 
-  const props = {
+  useEffect(() => {
+    if (cartItems?.length) {
+      props.setIsContinueDisabled(false);
+    }
+  }, [cartItems,props]);
+
+  const homeComponentprops = {
     catalogItems,
     cartItems,
     addToCart,
     removeFromCart,
-    iscataloglistLoading
-    
+    iscataloglistLoading,
   };
 
-  return <HomeComponent {...props} />;
+  return <HomeComponent {...homeComponentprops} />;
 };
 
 export default React.memo(Home);

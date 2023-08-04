@@ -1,19 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../Context/cartContext";
 import Checkout from "../../components/checkout";
 import useCheckoutCalculations from "../../customHooks/useCart";
-const FinalCheckout = () => {
-  const { cartItems ,removeFromCart} = useContext(CartContext);
+const FinalCheckout = (props) => {
+  const { isSubmitLoading } = props;
+  const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
   const { discountedList, discountedTotal, cartTotal } =
     useCheckoutCalculations(cartItems);
-  let props = {
+  useEffect(() => {
+    clearCart();
+  }, [isSubmitLoading, clearCart]);
+
+  let CheckoutProps = {
     cartItems,
     discountedList,
     discountedTotal,
     cartTotal,
-    removeFromCart
+    removeFromCart,
+    isSubmitLoading,
   };
-  return <Checkout {...props} />;
+  return <Checkout {...CheckoutProps} />;
 };
 
 export default FinalCheckout;

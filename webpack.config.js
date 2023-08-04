@@ -3,26 +3,20 @@
 const path = require("path");
 
 module.exports = {
-  // Set debugging source maps to be "inline" for
-  // simplicity and ease of use
   devtool: "inline-source-map",
 
-  // The application entry point
   entry: "./src/index.tsx",
 
-  // Where to compile the bundle
-  // By default the output directory is `dist`
   output: {
     filename: "bundle.js"
   },
 
-  // Supported file loaders
   module: {
     rules: [ {
       test: /\.css$/,
       use: [
         'style-loader',
-        'resolve-url-loader', // Make sure this comes before other CSS loaders
+        'resolve-url-loader', 
         'css-loader',
         'postcss-loader',
       ],
@@ -34,7 +28,6 @@ module.exports = {
     ]
   },
 
-  // File extensions to support resolving
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
   }

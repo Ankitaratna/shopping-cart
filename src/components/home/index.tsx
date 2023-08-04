@@ -10,17 +10,28 @@ interface CatalogItem {
   description: string;
   image: string;
 }
+interface cartItem
+{
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+  discountedPrice: number;
+  quantity: number;
+}
 
 interface HomeProps {
   catalogItems: CatalogItem[];
-  cartItems: CatalogItem[];
+  cartItems: cartItem[];
   addToCart: (item: CatalogItem) => void;
   removeFromCart: (itemId: number) => void;
   iscataloglistLoading: boolean;
 }
 
 const Home: React.FC<HomeProps> = (props) => {
-  const { catalogItems, addToCart, removeFromCart, iscataloglistLoading } =
+  const { catalogItems, addToCart, removeFromCart, iscataloglistLoading,cartItems } =
     props;
   return (
     <div className="home-wrapper">
@@ -43,6 +54,7 @@ const Home: React.FC<HomeProps> = (props) => {
                 item={item}
                 addToCart={addToCart}
                 removeFromCart={removeFromCart}
+                cartItems={cartItems}
               />
             ))}
       </div>

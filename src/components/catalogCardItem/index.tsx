@@ -10,17 +10,28 @@ interface CatalogItem {
   description: string;
   image: string;
 }
-
+interface cartItem {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+  discountedPrice: number;
+  quantity: number;
+}
 interface CatalogItemCardProps {
   item?: CatalogItem;
   addToCart: (item: CatalogItem) => void;
   removeFromCart: (itemId: number) => void;
+  cartItems?: cartItem[];
 }
 
 const CatalogItemCard: React.FC<CatalogItemCardProps> = ({
   item,
   addToCart,
   removeFromCart,
+  cartItems,
 }) => {
   const handleAddToCart = (item: CatalogItem) => {
     addToCart(item);
@@ -29,6 +40,10 @@ const CatalogItemCard: React.FC<CatalogItemCardProps> = ({
   const handleRemoveFromCart = (id: number) => {
     removeFromCart(item.id);
   };
+
+  const isCardSelected = cartItems?.find((cartItem) => cartItem.id === item.id)
+    ? true
+    : false;
 
   if (!item) {
     return (
@@ -54,7 +69,7 @@ const CatalogItemCard: React.FC<CatalogItemCardProps> = ({
   }
 
   return (
-    <div className="catalog-item-card">
+    <div className={`catalog-item-card ${isCardSelected ? "selected" : ""}`}>
       <img
         src={item?.image}
         alt={item?.title}

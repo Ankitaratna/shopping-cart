@@ -16,7 +16,7 @@ const useCheckoutCalculations = (cartItems) => {
       }));
       setDiscountedList(tempDiscountedList);
     }
-  }, [cartItems]);
+  }, [cartItems,cartTotal]);
 
   return { discountedList, discountedTotal, cartTotal };
 };

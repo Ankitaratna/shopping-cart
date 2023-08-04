@@ -13,6 +13,7 @@ interface CartItem {
   category: string;
   description: string;
   image: string;
+  discountedPrice: number;
   quantity: number;
 }
 
@@ -21,6 +22,7 @@ interface CartContextProps {
   setcartItems: Dispatch<SetStateAction<CartItem[]>>;
   addToCart: (item: CartItem) => void;
   removeFromCart: (itemId: number) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextProps | undefined>(
@@ -35,7 +37,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setcartItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
-    console.log(item.id);
     if (!cartItems.find((cartItem) => cartItem.id === item.id)) {
       setcartItems((prevItems) => [...prevItems, { quantity: 1, ...item }]);
     } else {
@@ -54,12 +55,16 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const removeFromCart = (itemId: number) => {
     setcartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
+  const clearCart = () => {
+    setcartItems([]);
+  };
 
   const contextValue: CartContextProps = {
     cartItems,
     setcartItems,
     addToCart,
     removeFromCart,
+    clearCart,
   };
 
   return (

@@ -18,15 +18,15 @@ interface CartItem {
   description: string;
   image: string;
   discountedPrice: number;
-  
+  quantity: number;
 }
 
 interface CheckoutProps {
   cartItems: CartItem[];
-  discountedList: CartItem[]; // You need to define this type
-  discountedTotal: number; // You need to define this type
-  cartTotal: number; // You need to define this type
-  removeFromCart:(itemId: number) => void;
+  discountedList: CartItem[];
+  discountedTotal: number;
+  cartTotal: number;
+  removeFromCart: (itemId: number) => void;
 }
 
 const Checkout: React.FC<CheckoutProps> = (props) => {
@@ -64,7 +64,7 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
             <IconButton
               size="small"
               sx={{ width: "15px", marginBottom: "auto" }}
-                onClick={() => removeFromCart(item.id)}
+              onClick={() => removeFromCart(item.id)}
               aria-label="Remove Item"
             >
               <CloseIcon />
@@ -90,10 +90,10 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
             ${cartTotal || 0}
           </Typography>
           <Typography variant="subtitle1" className="item-title">
-            ${cartTotal - discountedTotal || 0}
+            ${(cartTotal - discountedTotal || 0).toFixed(2)}
           </Typography>
           <Typography variant="subtitle1" className="item-title">
-            ${discountedTotal || 0}
+            ${(discountedTotal || 0).toFixed(2)}
           </Typography>
         </div>
       </div>

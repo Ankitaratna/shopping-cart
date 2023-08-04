@@ -1,30 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
-import { CartContext } from "../../Context/cartContext";
+import React, { useState, useEffect } from "react";
 
 interface ShippingDetail {
-  id: number;
+  customer_id: string;
   name: string;
   address: string;
-  // ... other properties
+  city: string;
+  postal_code: number;
+  country: string;
+  phone: string;
 }
 
 const ShippingDetails: React.FC = () => {
   const [shippingDetails, setShippingDetails] = useState<ShippingDetail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { cartItems } = useContext(CartContext);
-  console.log(cartItems, "cIIIIII");
   useEffect(() => {
-    // Simulate fetching shipping details from an API after a delay
     const simulateApiCall = (): Promise<ShippingDetail[]> => {
       return new Promise((resolve) => {
         setTimeout(() => {
           const simulatedData: ShippingDetail[] = [
-            { id: 1, name: "John Doe", address: "123 Main St" },
-            { id: 2, name: "Jane Smith", address: "456 Elm St" },
-            // ... more shipping details
+            {
+              customer_id: "12345",
+              name: "John Doe",
+              address: "123 Main St",
+              city: "New York",
+              postal_code: 10001,
+              country: "United States",
+              phone: "123 - 456 - 7890",
+            },
           ];
           resolve(simulatedData);
-        }, 2000); // Simulating a 2-second delay
+        }, 1000);
       });
     };
 
@@ -47,10 +52,13 @@ const ShippingDetails: React.FC = () => {
       ) : (
         <div className="shipping-list">
           {shippingDetails.map((shipping) => (
-            <div key={shipping.id}>
-              <p>Name: {shipping.name}</p>
-              <p>Address: {shipping.address}</p>
-              {/* ... other details */}
+            <div key={shipping?.customer_id}>
+              <p>Name: {shipping?.name}</p>
+              <p>Address: {shipping?.address}</p>
+              <p>City: {shipping?.city}</p>
+              <p>Postal Code: {shipping?.postal_code}</p>
+              <p>Country: {shipping?.country}</p>
+              <p>Phone: {shipping?.phone}</p>
             </div>
           ))}
         </div>

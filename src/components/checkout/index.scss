@@ -3,8 +3,16 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows:1fr 1fr 1fr;
   justify-content: space-between;
-  width: 31vw;
+  width: 25vw;
+  margin-right: 1rem;
   margin-left: auto;
+  .label{
+    text-align: end;
+  }
+  .value
+  {
+    text-align: end;
+  }
 }
 .header{
   margin-left: 0.6rem;
