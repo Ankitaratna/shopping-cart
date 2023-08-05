@@ -3,13 +3,18 @@ import { CartContext } from "../../Context/cartContext";
 import Checkout from "../../components/checkout";
 import useCheckoutCalculations from "../../customHooks/useCart";
 const FinalCheckout = (props) => {
-  const { isSubmitLoading } = props;
+  const { isSubmitLoading, goPreviousPage } = props;
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
   const { discountedList, discountedTotal, cartTotal } =
     useCheckoutCalculations(cartItems);
+    useEffect(() => {
+      if (cartItems.length === 0) {
+        goPreviousPage({ pageNo: 1, page: "shipping" });
+      }
+    }, [cartItems]);
   useEffect(() => {
-    clearCart();
-  }, [isSubmitLoading, clearCart]);
+    if (isSubmitLoading) clearCart();
+  }, [isSubmitLoading]);
 
   let CheckoutProps = {
     cartItems,

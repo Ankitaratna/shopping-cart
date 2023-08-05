@@ -31,7 +31,7 @@ const Home: React.FC<any> = (props) => {
     if (cartItems?.length) {
       props.setIsContinueDisabled(false);
     }
-  }, [cartItems,props]);
+  }, [cartItems]);
 
   const homeComponentprops = {
     catalogItems,

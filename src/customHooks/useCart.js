@@ -8,7 +8,7 @@ const useCheckoutCalculations = (cartItems) => {
   );
 
   useEffect(() => {
-    if (cartItems && cartItems.length > 0) {
+    if (cartItems) {
       setDiscountedTotal(cartTotal - 0.1 * cartTotal);
       let tempDiscountedList = cartItems.map((item) => ({
         ...item,
@@ -16,7 +16,7 @@ const useCheckoutCalculations = (cartItems) => {
       }));
       setDiscountedList(tempDiscountedList);
     }
-  }, [cartItems,cartTotal]);
+  }, [cartItems]);
 
   return { discountedList, discountedTotal, cartTotal };
 };

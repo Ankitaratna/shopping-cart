@@ -21,6 +21,7 @@ const useCurrentPage = () => {
     currentState,
     goPreviousPage,
     goNextPage,
+    setCurrentState
   };
 };
 

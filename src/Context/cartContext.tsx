@@ -53,7 +53,14 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const removeFromCart = (itemId: number) => {
-    setcartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+    
+    setcartItems((prevItems) =>
+      prevItems.filter((item) => {
+        if (item.id !== itemId) {
+          return item;
+        }
+      })
+    );
   };
   const clearCart = () => {
     setcartItems([]);

@@ -10,7 +10,7 @@ import { Box, IconButton } from "@mui/material";
 import "./App.scss";
 
 const ShoppingApp = () => {
-  const { currentState, goPreviousPage, goNextPage } = useCurrentPage();
+  const { currentState, goPreviousPage, goNextPage,setCurrentState } = useCurrentPage();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
@@ -78,6 +78,7 @@ const ShoppingApp = () => {
             <Checkout
               setIsContinueDisabled={setIsContinueDisabled}
               isSubmitLoading={isSubmitLoading}
+              goPreviousPage={goPreviousPage}
             />
           )}
         {isSubmitted && !isSubmitLoading ? (
