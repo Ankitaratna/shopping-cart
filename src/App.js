@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Home from "./containers/Home";
 import Checkout from "./containers/checkout";
 import { CartProvider } from "./Context/cartContext";
@@ -7,6 +7,7 @@ import ShippingDetails from "./containers/shippingDetails";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, IconButton } from "@mui/material";
+import { CartContext } from "./Context/cartContext";
 import "./App.scss";
 
 const ShoppingApp = () => {
@@ -14,6 +15,7 @@ const ShoppingApp = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const {appState}=useContext(CartContext);
 
   const handleSubmit = () => {
     setIsSubmitLoading(true);
@@ -23,7 +25,6 @@ const ShoppingApp = () => {
     }, 2000);
   };
   return (
-    <CartProvider>
       <div className="app-wrapper">
         <div className="page-switch-cta">
           {currentState?.page !== "home" && !isSubmitted && !isSubmitLoading ? (
@@ -94,7 +95,6 @@ const ShoppingApp = () => {
           ""
         )}
       </div>
-    </CartProvider>
   );
 };
 

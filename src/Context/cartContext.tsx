@@ -23,6 +23,10 @@ interface CartContextProps {
   addToCart: (item: CartItem) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
+  appState:string;
+  setAppState:Function;
+  deliveryAddress:DeliveryAdderess;
+  setDeliveryAddress:Function;
 }
 
 export const CartContext = createContext<CartContextProps | undefined>(
@@ -33,8 +37,20 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
+interface DeliveryAdderess{
+  pin:Number,
+  city:string,
+  state:string,
+  country:string,
+  landmark:string,
+  address:string
+
+}
+
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setcartItems] = useState<CartItem[]>([]);
+  const [appState,setAppState]=useState<string>("listing");
+  const [deliveryAddress,setDeliveryAddress]=useState();
 
   const addToCart = (item: CartItem) => {
     if (!cartItems.find((cartItem) => cartItem.id === item.id)) {
@@ -72,6 +88,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     addToCart,
     removeFromCart,
     clearCart,
+    appState,
+    setAppState,
+    deliveryAddress,
+    setDeliveryAddress
   };
 
   return (
