@@ -4,17 +4,17 @@ import './index.css';
 import ShoppingApp from './App';
 import reportWebVitals from './reportWebVitals';
 import { CartProvider } from "./Context/cartContext";
-import { ShippingDetailProvider } from "./Context/shippingDetailContext";
-import { PageStateProvider } from "./Context/pageStateContext";
+import { ShippingDetailProvider } from "./Context/shippingDetail";
+import { PageContextProvider } from "./Context/pageContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <CartProvider>
       <ShippingDetailProvider>
-        <PageStateProvider>
+        <PageContextProvider>
           <ShoppingApp />
-        </PageStateProvider>
+        </PageContextProvider>
       </ShippingDetailProvider>
     </CartProvider>
   </React.StrictMode>
